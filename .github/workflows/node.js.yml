@@ -14,11 +14,8 @@ pull_request:
 
 # Defines the jobs that the workflow will execute
 jobs:
-  # Job identifier, can be any name (here it's 'build')
   build:
-    # Specifies the type of virtual host environment (runner) to use
     runs-on: ubuntu-latest
-
     # Strategy for running the jobs - this section is useful for testing across multiple environments
     strategy:
     # A matrix build strategy to test against multiple versions of Node.js
