@@ -37,4 +37,4 @@ jobs:
       run: npm run build --if-present
 
     - name: Runs tests as defined in the project's package.json
-      run: npm test package.jason
+      run: npm test
