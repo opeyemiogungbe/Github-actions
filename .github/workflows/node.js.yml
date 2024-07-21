@@ -18,8 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     # Strategy for running the jobs - this section is useful for testing across multiple environments
     strategy:
-    # A matrix build strategy to test against multiple versions of Node.js
-    matrix:
+      matrix:
         node-version: [14.x, 16.x]
 
     steps:
