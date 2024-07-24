@@ -9,5 +9,5 @@ jobs:
     - uses: actions/checkout@v2
     - name: install dependencies
       run: npm install
-    - name: Build 
+    - name: Build with webpack
       run: npm run build
