@@ -1,2 +1,2 @@
 # Github-actions
-mini project forgithub actions Ci/Cd
+Mini project forgithub actions Ci/Cd tools with github
