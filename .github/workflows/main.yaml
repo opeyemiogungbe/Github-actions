@@ -1,13 +1,16 @@
 name: example workflow
-on: [push]
-
-# Define task like building, testing, deploying
+on:
+  push:
+    
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: install dependencies
-      run: npm install
-    - name: Build with webpack
-      run: npm run build
+      - name: Check out code
+        uses: actions/checkout@v2
+      - name: Install dependencies
+        run: npm install
+      - name: Build with webpack
+        run: npm run build
+      - name: Run tests
+        run: npm test
