@@ -1,15 +1,21 @@
 name: example workflow
+
 on:
   push:
+
 env:
   CUSTOM_VAR: value
+
 jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      content: READ
+      contents: READ
       packages: WRITE
     steps:
+      - name: use secret
+        run: |
+          echo "Access Token: ${{ secrets.ACCESS_TOKEN }}"
       - name: Check out code
         uses: actions/checkout@v2
       - name: Install dependencies
