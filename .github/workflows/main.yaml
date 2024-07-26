@@ -1,10 +1,12 @@
 name: example workflow
 on:
   push:
-    
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      content: read
+      packages: write
     steps:
       - name: Check out code
         uses: actions/checkout@v2
