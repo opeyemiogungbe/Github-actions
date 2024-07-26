@@ -1,12 +1,14 @@
 name: example workflow
 on:
   push:
+env:
+  CUSTOM_VAR: value
 jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      content: read
-      packages: write
+      content: READ
+      packages: WRITE
     steps:
       - name: Check out code
         uses: actions/checkout@v2
