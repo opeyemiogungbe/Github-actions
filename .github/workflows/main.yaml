@@ -2,7 +2,7 @@ name: example workflow
 
 on:
   push:
-  
+
 env:
   CUSTOM_VAR: value
 
@@ -14,16 +14,24 @@ jobs:
       packages: WRITE
     strategy:
       matrix:
-        node: [ubuntu-latest, macos-latest, windows-latest]
+        node: [ubuntu-18.04, macos-latest, windows-latest]
     steps:
       - name: use secret
         run: |
           echo "Access Token: ${{ secrets.ACCESS_TOKEN }}"
       - name: Check out code
         uses: actions/checkout@v2
+      - name: Cache Node Modules
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
       - name: Install dependencies
         run: npm install
       - name: Build with webpack
         run: npm run build
       - name: Run tests
         run: npm test
+
