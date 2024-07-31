@@ -1,8 +1,11 @@
 name: Bump version and tag
+
 on:
   push:
     branches:
       - main
+    tags:
+      - '*'
 
 jobs:
   build:
@@ -11,12 +14,23 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-        # The checkout action checks out your repository under $GITHUB_WORKSPACE, so your workflow can access it.
-
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.26.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
-        # This action automatically increments the patch version and tags the commit.
-        # 'DEFAULT_BUMP' specifies the type of version bump (major, minor, patch).
+jobs:
+  build:
+    name: Create Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
