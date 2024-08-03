@@ -19,7 +19,19 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
-
+          
+      - name: Check if tag exists
+        run: |
+          if git rev-parse v1.0 >/dev/null 2>&1; then
+            echo "Tag v1.0 already exists. Handling accordingly."
+            # Add the handling for existing tag here
+            # For example: 
+            # git tag --delete v1.0
+            # git push origin :refs/tags/v1.0
+          else
+            echo "Tag v1.0 doesn't exist. Continuing with the release creation."
+          fi
+          
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -28,5 +40,3 @@ jobs:
         with:
           tag_name: v1.0
           release_name: "Release 1.0"
-
-
